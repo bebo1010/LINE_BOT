@@ -30,10 +30,10 @@ class TocMachine(GraphMachine):
             send_text_message(event.reply_token, "此城市不存在!")
             self.city_not_exist(event)
 
-    def checking_temperature(self):
+    def checking_temperature(self, event):
         return self.status == 0
     
-    def checking_weather(self):
+    def checking_weather(self, event):
         return self.status == 1
 
     def on_enter_get_temperature(self, event):
