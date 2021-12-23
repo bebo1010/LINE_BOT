@@ -3,8 +3,6 @@ dependency
 pip install beautifulsoup4
 pip install selenium
 pip install webdriver-manager
-externel dependency:
-lxml parser
 """
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -23,7 +21,7 @@ def get_website():
     #get website info
     driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get("https://www.cwb.gov.tw/V8/C/W/OBS_Map.html")
-    soup = BeautifulSoup(driver.page_source, "lxml")
+    soup = BeautifulSoup(driver.page_source, "html.parser")
     driver.quit()
     return soup
 
