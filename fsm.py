@@ -45,7 +45,7 @@ class TocMachine(GraphMachine):
         self.done()
 
     def on_exit_get_temperature(self):
-        print("Done checking")
+        print("Done checking temperature")
 
     def on_enter_get_weather(self, event):
         print("Time to check weather")
@@ -56,4 +56,4 @@ class TocMachine(GraphMachine):
         self.done()
 
     def on_exit_get_weather(self):
-        print("Done checking")
+        print("Done checking weather")
