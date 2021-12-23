@@ -24,8 +24,9 @@ class TocMachine(GraphMachine):
         self.city = event.message.text #expect user to input city name here
         if self.city in cities:
             if self.city in list(other_interpretations):
-                send_text_message(event.reply_token, "為您查詢中")
-                self.city_exist(event)
+                self.city = other_interpretations[self.city]
+            send_text_message(event.reply_token, "為您查詢中")
+            self.city_exist(event)
         else:
             send_text_message(event.reply_token, "此城市不存在!")
             self.city_not_exist(event)
