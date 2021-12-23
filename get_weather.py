@@ -33,7 +33,6 @@ def get_weather(city):
     cities_info = soup.find("ol",id="town")
     city_info = cities_info.find("a", title = full_name)
     weather = city_info.find("span", class_="weather").img['alt']
-    #print(weather)
     return weather
 
 def get_temperature(city):
@@ -44,5 +43,4 @@ def get_temperature(city):
     cities_info = soup.find("ol",id="town")
     city_info = cities_info.find("a", title = full_name)
     temperatue = city_info.find("span", class_="tem-C is-active").string
-    #print(temperatue)
     return temperatue
