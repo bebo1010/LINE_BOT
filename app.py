@@ -29,7 +29,7 @@ machine = TocMachine(
             "conditions": "weather_check",
         },
         {
-            "trigger": "waiting_input",
+            "trigger": "advance",
             "source": "ask_city",
             "dest": "check_city",
         },
@@ -61,7 +61,6 @@ machine = TocMachine(
 )
 
 app = Flask(__name__, static_url_path="")
-
 
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv("LINE_CHANNEL_SECRET", None)
@@ -138,7 +137,6 @@ def webhook_handler():
 def show_fsm():
     machine.get_graph().draw("fsm.png", prog="dot", format="png")
     return send_file("fsm.png", mimetype="image/png")
-
 
 if __name__ == "__main__":
     port = os.environ.get("PORT", 8000)

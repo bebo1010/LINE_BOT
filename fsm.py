@@ -19,7 +19,6 @@ class TocMachine(GraphMachine):
     
     def on_enter_ask_city(self, event):
         send_text_message(event.reply_token, "請輸入要查詢的城市名稱")
-        self.waiting_input()
 
     def on_enter_check_city(self, event):
         self.city = event.message.text #expect user to input city name here
