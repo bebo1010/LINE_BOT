@@ -1,7 +1,7 @@
 from transitions.extensions import GraphMachine
 
 from utils import send_text_message
-from get_weather import get_weather, get_temperature, cities
+from get_weather import get_weather, get_temperature, temperature_keywords, weather_keywords, cities, other_impretetations
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -9,20 +9,27 @@ class TocMachine(GraphMachine):
 
     def temperature_check(self, event):
         text = event.message.text
-        return text.lower() == "check temperature"
+        self.status = 0 #status = 0 => check temperature
+        return text in temperature_keywords
 
     def weather_check(self, event):
         text = event.message.text
-        return text.lower() == "check weather"
+        self.status = 1 #status = 1 => check weather
+        return text in weather_keywords
     
-    def on_enter_get_city_temperature(self, event):
+    def on_enter_ask_city(self, event):
+        send_text_message(event.reply_token, "請輸入要查詢的城市名稱")
+        self.waiting_input()
+
+    def on_enter_check_city(self, event):
         self.city = event.message.text #expect user to input city name here
         if self.city in cities:
-            send_text_message(event.reply_token, "為您查詢中")
-            self.city_exist(event)
+            if self.city in list(other_impretetations):
+                send_text_message(event.reply_token, "為您查詢中")
+                self.city_exist()
         else:
             send_text_message(event.reply_token, "此城市不存在!")
-            self.city_not_exist(event)
+            self.city_not_exist()
 
     def on_enter_get_temperature(self, event):
         print("Time to check temperature")

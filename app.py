@@ -14,38 +14,45 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "get_city_temperature", "get_city_weather", "get_temperature", "get_weather"],
+    states=["user", "ask_city", "check_city", "get_temperature", "get_weather"],
     transitions=[
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "get_city_temperature",
+            "dest": "ask_city",
             "conditions": "temperature_check",
         },
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "get_city_weather",
+            "dest": "ask_city",
             "conditions": "weather_check",
         },
         {
-            "trigger": "city_exist",
-            "source": "get_city_temperature",
-            "dest": "get_temperature",
+            "trigger": "waiting_input",
+            "source": "ask_city",
+            "dest": "check_city",
         },
         {
             "trigger": "city_exist",
-            "source": "get_city_weather",
+            "source": "check_city",
+            "dest": "get_temperature",
+            "conditions": "checking_temperature",
+        },
+        {
+            "trigger": "city_exist",
+            "source": "check_city",
             "dest": "get_weather",
+            "conditions": "checking_weather",
         },
         {   "trigger": "done",
             "source": ["get_temperature", "get_weather"], 
-            "dest": "user"
+            "dest": "user",
         },
         {
             "trigger": "city_not_exist",
-            "source": ["get_city_temperature", "get_city_weather"],
-            "dest": "user"
+            "source": "check_city",
+            "dest": "user",
         },
     ],
     initial="user",
