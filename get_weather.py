@@ -3,6 +3,8 @@ dependency
 pip install beautifulsoup4
 pip install selenium
 pip install webdriver-manager
+externel dependency:
+lxml parser
 """
 from selenium import webdriver
 from bs4 import BeautifulSoup
