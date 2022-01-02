@@ -115,6 +115,7 @@ After `temperature` or `weather` info is sent to user, `fsm` goes back to initia
 	* Reply: Corresponding info on the city user asking for
 	* go back to `user` state after replying message
 
+Use this [link](https://weather-showing-bot.herokuapp.com/show-fsm) to track where `fsm` is.  
 ## Deploy
 Setting to deploy webhooks on Heroku.
 
