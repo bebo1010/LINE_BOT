@@ -76,8 +76,8 @@ Or You can use [servo](http://serveo.net/) to expose local servers to the intern
 ## Usage
 The initial state is set to `user`.
 
-Bot will wait for `user input` at first.
-When certain `keyword` is read, `fsm` will go to `ask_city` state.
+Bot will wait for `user input` at first.  
+When certain `keyword` is read, `fsm` will go to `ask_city` state.  
 ```
 keywords table:
 for weather checking:
@@ -95,10 +95,10 @@ Allowed city names are:
 "澎湖", "金門", "連江"
 (I am too lazy to deal with English city name, so Chinese only)
 ```
-After user input, `fsm` will advance into `check_city` state.
-If user input is in the table above, bot will check the corresponding info on website.([link](https://www.cwb.gov.tw/V8/C/W/OBS_Map.html))
-If user input is not in the table, `fsm` will go back to initial state(`user` state).
-After `temperature` or `weather` info is sent to user, `fsm` goes back to initial state. 
+After user input, `fsm` will advance into `check_city` state.  
+If user input is in the table above, bot will check the corresponding info on website.([link](https://www.cwb.gov.tw/V8/C/W/OBS_Map.html))  
+If user input is not in the table, `fsm` will go back to initial state(`user` state).  
+After `temperature` or `weather` info is sent to user, `fsm` goes back to initial state.   
 * user
 	* Input: See above table for keywords
 		* advance to `ask_input` state
