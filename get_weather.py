@@ -8,8 +8,8 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from webdriver_manager.chrome import ChromeDriverManager
 
-temperature_keywords = {"氣溫", "溫度", "查詢溫度", "查詢氣溫", "目前溫度", "目前氣溫"}
-weather_keywords = {"天氣", "氣象", "查詢天氣", "查詢氣象", "目前天氣"}
+temperature_keywords = {"氣溫", "溫度", "查詢溫度", "查詢氣溫", "目前溫度", "目前氣溫", "Temperature", "temperature", "Get temperature", "get temperature"}
+weather_keywords = {"天氣", "氣象", "查詢天氣", "查詢氣象", "目前天氣", "Weather", "weather", "Get weather", "get weather"}
 cities = {"基隆","台北","臺北",	"新北", "桃園", "新竹", "苗栗", 
 "台中", "臺中", "彰化", "南投", "雲林"
 "嘉義", "台南", "臺南", "高雄", "屏東", 
