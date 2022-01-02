@@ -71,19 +71,49 @@ Or You can use [servo](http://serveo.net/) to expose local servers to the intern
 
 
 ## Finite State Machine
-![fsm](./img/show-fsm.png)
+![fsm](./fsm.png)
 
 ## Usage
 The initial state is set to `user`.
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
-
+Bot will wait for `user input` at first.
+When certain `keyword` is read, `fsm` will go to `ask_city` state.
+```
+keywords table:
+for weather checking:
+"天氣", "氣象", "查詢天氣", "查詢氣象", "目前天氣", "Weather", "weather", "Get weather", "get weather"
+for temperature checking:
+"氣溫", "溫度", "查詢溫度", "查詢氣溫", "目前溫度", "目前氣溫", "Temperature", "temperature", "Get temperature", "get temperature"
+```
+Then bot will wait for another user input in `ask_city` state.
+```
+Allowed city names are:
+"基隆","台北","臺北","新北", "桃園", "新竹", "苗栗", 
+"台中", "臺中", "彰化", "南投", "雲林"
+"嘉義", "台南", "臺南", "高雄", "屏東", 
+"宜蘭", "台東", "臺東", "花蓮",
+"澎湖", "金門", "連江"
+(I am too lazy to deal with English city name, so Chinese only)
+```
+After user input, `fsm` will advance into `check_city` state.
+If user input is in the table above, bot will check the corresponding info on website.([link](https://www.cwb.gov.tw/V8/C/W/OBS_Map.html))
+If user input is not in the table, `fsm` will go back to initial state(`user` state).
+After `temperature` or `weather` info is sent to user, `fsm` goes back to initial state. 
 * user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
-
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
+	* Input: See above table for keywords
+		* advance to `ask_input` state
+* ask_input
+	* Reply: "請輸入要查詢的城市名稱"
+	* wait for user input in this state
+* check_input
+	* If city exists:
+		* advance to `states` corresponding to what info user is asking.
+	* If city does not exist:
+		* Reply: "此城市不存在!"
+		* go back to `user` state
+* get_temperature and get_weather:
+	* Reply: Corresponding info on the city user asking for
+	* go back to `user` state after replying message
 
 ## Deploy
 Setting to deploy webhooks on Heroku.
