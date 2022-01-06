@@ -57,3 +57,11 @@ class TocMachine(GraphMachine):
 
     def on_exit_get_weather(self):
         print("Done checking weather")
+
+    def echo_check(self, event):
+        text = event.message.text
+        return text == "echo"
+        
+    def on_enter_echo(self, event):
+        send_text_message(event.reply_token, "Hello, World!")
+        self.done()

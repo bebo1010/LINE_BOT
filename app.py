@@ -14,7 +14,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "ask_city", "check_city", "get_temperature", "get_weather"],
+    states=["user", "ask_city", "check_city", "get_temperature", "get_weather", "echo"],
     transitions=[
         {
             "trigger": "advance",
@@ -27,6 +27,12 @@ machine = TocMachine(
             "source": "user",
             "dest": "ask_city",
             "conditions": "weather_check",
+        },
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "echo",
+            "conditions": "echo_check",
         },
         {
             "trigger": "advance",
@@ -46,7 +52,7 @@ machine = TocMachine(
             "conditions": "checking_weather",
         },
         {   "trigger": "done",
-            "source": ["get_temperature", "get_weather"], 
+            "source": ["get_temperature", "get_weather", "echo"], 
             "dest": "user",
         },
         {
